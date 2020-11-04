@@ -1,38 +1,68 @@
-//nome, energia, vida, ataque, defesa
-import prompt from "prompt-sync";
-export class Personagem {
+import Heroi from "./Heroi";
+
+export default class Personagem {
     constructor(
         public nome: string,
-        public energia: number,
         public vida: number,
         public ataque: number,
         public defesa: number
+    
     ) {}
-}
 
-let sansa: Personagem = new Personagem("Sansa Stark", 100, 40, 20, 20);
-
-let teclado = prompt();
-let option: number = 0;
-
-while (option != 9) {
-    console.log("+========= Personagem =============+");
-    console.log("|1. Treinar ataque                 |");
-    console.log("|2. Treinar defesa                 |");
-    console.log("|3. Imprimir atributos             |");
-    console.log("|9. Sair                           |");
-    console.log("+==================================+");
-
-    option = +teclado("Escolha uma ação");
-
-    switch (option) {
-        case 1:
-            sansa.ataque += 2;
-            break;
-        case 3:
-            console.log("sansa :>> ", sansa);
-            break;
-        default:
-            break;
+    status(): void {
+        console.log("Nome: ", this.nome);
+        console.log("Vida: ", this.vida);
+        console.log("Ataque: ", this.ataque)
+        console.log("Defesa: ", this.defesa)
     }
+
+
+    treinarAtaque(): void {
+        this.ataque += 5;
+    }
+
+    treinarDefesa(): void {
+        this.defesa += 2;
+    }
+
+    rolarAtacar(): number {
+       return Math.floor(Math.random() * 20) + 1;
+    }
+
+    recuperarVida(): void {
+        this.vida += Math.floor(Math.random() * 10) + 1;
+    }
+
+    morreu(): boolean {
+        if( this.vida <= 0){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    definirAtributos(vida: number, ataque: number, defesa: number): void {
+        this.vida = vida;
+        this.ataque = ataque;
+        this.defesa = defesa;
+    }
+
+    fightClub( oponente: Personagem) {
+        let dice = Math.floor(Math.random() * 20) + 1;
+        
+        if( dice > oponente.defesa){
+            console.log("O ataque acertou!!")
+            oponente.vida -= this.ataque;
+        } else {
+            console.log("O ataque errou!!")
+        }
+    }
+
 }
+
+
+
+
+
+
+
