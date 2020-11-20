@@ -7,14 +7,12 @@ import Heroi from "./Heroi"
 let teclado = prompt();
 let option: number = 0;
 
-let heroi: Heroi = new Heroi("Charles", criarPersonagem());
-let vilao: Personagem = new Personagem("Fefo", 100, 10, 12); // Objeto criado para testar onde seria inserido o vilão
+let heroi: Heroi = new Heroi("NoName", criarPersonagem());
+let vilao: Personagem = new Personagem("Unknown", 30, 10, 12); // Objeto criado para testar onde seria inserido o vilão
 
 while( option != 9){
     console.log('1. Combate');
-    console.log('2. Treinar Defesa');
     console.log('3. Mostrar Atributos');
-    console.log('4. Descansar');
     console.log('5. Criar Personagem');
     console.log('9. Sair');
 
@@ -24,20 +22,12 @@ while( option != 9){
          case 1:
              lutar();
              break;
-        // case 2:
-        //     hero.treinarDefesa();
-        //     break;
         
         case 3:
              heroi.status();
              vilao.status(); 
              break;   
 
-        // case 4:
-        //     hero.vida += -5;
-        //     hero.status();
-        //     hero.recuperarVida();
-        //     break;
         case 5:
             criarPersonagem();
             break;
@@ -76,11 +66,11 @@ function criarPersonagem() {
 
 function lutar (){
     
-    
-    
     heroi.fightClub(vilao);
 
     if(!vilao.morreu){
         vilao.fightClub(heroi);
-    }
+     }
 }
+
+

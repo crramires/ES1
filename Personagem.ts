@@ -2,14 +2,15 @@ import Heroi from "./Heroi";
 
 export default class Personagem {
     constructor(
-        public nome: string,
-        public vida: number,
-        public ataque: number,
-        public defesa: number
+        protected nome: string,
+        protected vida: number,
+        protected ataque: number,
+        protected defesa: number
     
     ) {}
 
-    status(): void {
+
+    public status(): void {
         console.log("Nome: ", this.nome);
         console.log("Vida: ", this.vida);
         console.log("Ataque: ", this.ataque)
@@ -17,23 +18,11 @@ export default class Personagem {
     }
 
 
-    treinarAtaque(): void {
-        this.ataque += 5;
-    }
-
-    treinarDefesa(): void {
-        this.defesa += 2;
-    }
-
-    rolarAtacar(): number {
+   private rolarAtaque(): number {
        return Math.floor(Math.random() * 20) + 1;
     }
 
-    recuperarVida(): void {
-        this.vida += Math.floor(Math.random() * 10) + 1;
-    }
-
-    morreu(): boolean {
+    public morreu(): boolean {
         if( this.vida <= 0){
             return true;
         } else {
@@ -41,23 +30,35 @@ export default class Personagem {
         }
     }
 
-    definirAtributos(vida: number, ataque: number, defesa: number): void {
+    protected definirAtributos(vida: number, ataque: number, defesa: number): void {
         this.vida = vida;
         this.ataque = ataque;
         this.defesa = defesa;
+
     }
 
-    fightClub( oponente: Personagem) {
-        let dice = Math.floor(Math.random() * 20) + 1;
+    public fightClub( oponente: Personagem) {
+        let dice = this.rolarAtaque();
         
-        if( dice > oponente.defesa){
-            console.log("O ataque acertou!!")
-            oponente.vida -= this.ataque;
+        
+        if(oponente.vida <= 0){
+            console.log("Você morreu!!");
         } else {
-            console.log("O ataque errou!!")
+            
+            if( dice > oponente.defesa){
+                console.log("#################")
+                console.log("O ataque acertou!!")
+                console.log("#################")
+                oponente.vida -= this.ataque;
+                
+            } else {
+                console.log("#################")
+                console.log("O ataque errou!!")
+                console.log("#################")
+            }
         }
-    }
 
+    }
 }
 
 
